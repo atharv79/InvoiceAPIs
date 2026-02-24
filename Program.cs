@@ -10,6 +10,9 @@ namespace InvoiceAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddControllersWithViews();
+
+            
 
             builder.Services.AddControllers();
 
@@ -32,6 +35,11 @@ namespace InvoiceAPI
 
             app.UseAuthorization();
 
+            app.MapControllerRoute(
+                name: "invoice-ui",
+                pattern: "invoice/{action=View}/{id?}",
+                defaults: new { controller = "InvoiceView" }
+                );
 
             app.MapControllers();
 
